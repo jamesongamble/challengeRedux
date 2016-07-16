@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "appName": "challengeRedux",
+    "style": "sass",
+    "postcss": true,
+    "generatedWithVersion": 3
+  }
+}
