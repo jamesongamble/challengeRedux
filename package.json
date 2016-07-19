@@ -16,7 +16,7 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
-    "start": "node server.js --env=dev",
+    "start": "npm i webpack && node server.js --env=dev",
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false",
     "compile": "better-npm-run compile",
@@ -94,6 +94,7 @@
     "react-dom": "^0.14.8",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "resolve": "^1.1.7"
+    "resolve": "^1.1.7",
+    "webpack": "^1.13.1"
   }
 }
