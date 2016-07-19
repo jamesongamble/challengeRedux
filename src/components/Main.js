@@ -152,7 +152,7 @@ class AppComponent extends React.Component {
             />
 
           {
-            columnNames && columnNames.map(function (item) {
+            columnNames && columnNames.map((item) => {
               return (
                 <Column key={item}
                   header={<Cell>{item}</Cell>}
