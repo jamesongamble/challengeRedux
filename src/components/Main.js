@@ -3,8 +3,7 @@ require('normalize.css/normalize.css')
 require('../styles/App.css')
 const FixedDataTable = require('fixed-data-table')
 const React = require('react');
-const {Table, Column, ColumnGroup, Cell} = FixedDataTable;
-const cache = [];
+const {Table, Column, Cell} = FixedDataTable;
 
 const TextCell = (props) => {
   if (!props.ads) {
@@ -31,26 +30,26 @@ class AppComponent extends React.Component {
           'id': 1,
           'remote_id': '123',
           'name': '123',
-          'status': 'ACTIVE',
+          'status': 'ACTIVE'
         },
         {
           'id': 2,
           'remote_id': '456',
           'name': '456',
-          'status': 'ACTIVE',
+          'status': 'ACTIVE'
         },
         {
           'id': 3,
           'remote_id': '789',
           'name': '789',
-          'status': 'ACTIVE',
+          'status': 'ACTIVE'
         },
         {
           'id': 4,
           'remote_id': '901',
           'name': '901',
-          'status': 'ACTIVE',
-        },
+          'status': 'ACTIVE'
+        }
       ],
       ads_metrics: {
         'column_names': [
@@ -161,7 +160,7 @@ class AppComponent extends React.Component {
                   width={150}
                   />
               )
-            }) 
+            })
           }
         </Table>
     );

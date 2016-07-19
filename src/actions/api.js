@@ -1,7 +1,6 @@
 import qwest from 'qwest'
-import { toastr } from 'react-redux-toastr'
 import _ from 'lodash'
-import { push } from 'react-router-redux'
+import resolve from 'resolve'
 
 export const SCHEDULE_ALARM = 'SCHEDULE_ALARM'
 
@@ -21,12 +20,10 @@ export function scheduleAlarm (clockData): Action {
     const normalizedString = value.split(' ').join('+')
     normalizedClockData[key] = normalizedString
   })
-  console.log(normalizedClockData)
 
   qwest.get(`/api/users/distance`)
     .then((xhr, response) => {
       console.log(response);
-      // console.log(response.rows[0].elements[0].duration.text);
       resolve()
     })
   return {
@@ -36,5 +33,5 @@ export function scheduleAlarm (clockData): Action {
 }
 
 export const actions = {
-  scheduleAlarm,
+  scheduleAlarm
 }

@@ -18,6 +18,7 @@ describe('MainComponent', () => {
   });
 
   it('should have its component name as default className', () => {
-    expect(MainComponent.props.className).to.equal('index');
+    console.log(MainComponent.props);
+    expect(MainComponent.props.className).to.equal('flexcontainer');
   });
 });
