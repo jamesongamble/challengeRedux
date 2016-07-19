@@ -39,7 +39,7 @@
 
 ---
 
-# Foundation for EP SmartTravel
+# Foundation for React Data Grid
 
 
 Table of Contents
@@ -135,45 +135,11 @@ Great, now that introductions have been made here's everything in full detail:
 
 Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**.
 
-If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (e.g. `~/config/_production.js`). This can be entirely arbitrary, such as `NODE_ENV=staging` where the config file is `~/config/_staging.js`.
-
-Common configuration options:
-
-|Key|Description|
-|---|---|
-|`dir_src`|application source code base path|
-|`dir_dist`|path to build compiled application to|
-|`server_host`|hostname for the Express server|
-|`server_port`|port for the Express server|
-|`compiler_css_modules`|whether or not to enable CSS modules|
-|`compiler_devtool`|what type of source-maps to generate (set to `false`/`null` to disable)|
-|`compiler_vendor`|packages to separate into to the vendor bundle|
-
-CLI Generators
---------------
-
-This project integrates with [Redux CLI](https://github.com/SpencerCDixon/redux-cli) out of the box. If you used it to generate this project you have immediate access to the generators listed below (if you cloned/forked the project you have these features as well, but make sure to install the CLI first!).
-
-|Script|Description|Options|
-|---|---|---|
-|`redux g dumb <comp name>`|generates a dumb component and test file||
-|`redux g smart <smart name>`|generates a smart connected component and test file||
-|`redux g layout <comp name>`|generates functional layout component||
-|`redux g view <comp name>`|generates a view component||
-|`redux g form <form name>`|generates a form component (assumes redux-form)||
-|`redux g blueprint <new blueprint>`|generates an empty blueprint for you to make||
-**NOTE**: `redux-form` is not a dependency by default. If you wish to use it make sure to `npm i --save redux-form`, or if you wish to modify the skeleton you can update the blueprint in `~/blueprints/form/files/...`.
-
-All of these blueprints are available (and can be overriden) in the `~/blueprints` folder so you can customize the
-default generators for your project's specific needs. If you have an existing app you can run `redux init` to set up the CLI, then
-make sure to copy over the `blueprints` folder in this project for starter-kit specific generators.
-
-[See the Redux CLI github repo](https://github.com/SpencerCDixon/redux-cli#creating-blueprints) for more information on how to create and use blueprints.
 
 Structure
 ---------
 
-The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. It is something that has worked very well for me and my team, but use only what makes sense to you.
+The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. 
 
 ```
 .
@@ -260,30 +226,6 @@ Server
 
 This starter kit comes packaged with an Express server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. If you're deploying to production, take a look at [the deployment section](#deployment).
 
-Styles
-------
-
-Both `.scss` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
-
-**NOTE:** If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
-
-```js
-// current file: ~/src/components/some/nested/component/index.jsx
-import 'styles/core.scss' // this imports ~/src/styles/core.scss
-```
-
-Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing; this is especially useful for importing variables/mixins.
-
-Here's an example:
-
-```scss
-// current file: ~/src/styles/some/nested/style.scss
-// what used to be this (where base is ~/src/styles/_base.scss):
-@import '../../base';
-
-// can now be this:
-@import 'base';
-```
 
 Testing
 -------
