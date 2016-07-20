@@ -17,7 +17,7 @@
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
     "build": "webpack --config ./webpack.prod.config.js --progress --colors",
-    "star": "node ./src/app.js",
+    "start": "node ./src/app.js",
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false",
     "compile": "better-npm-run compile",
