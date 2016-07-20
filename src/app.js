@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
   const config = require('../webpack.dev.config.js')
   const compiler = webpack(config)
 
-  app.use(webpackHotMiddleware(compiler)) 
+  app.use(webpackHotMiddleware(compiler))
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
@@ -17,4 +17,5 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.listen(port)
-console.log(`Listening at http://localhost:${port}`)
+
+console.log(`Listening at http://localhost:${port}`)  // eslint-disable-line no-console

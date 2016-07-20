@@ -1,6 +1,8 @@
-require('./fixed-data-table.css')
-require('normalize.css/normalize.css')
-require('../styles/App.css')
+if (process.env.NODE_ENV !== 'test') {
+  require('./fixed-data-table.css')
+  require('normalize.css/normalize.css')
+  require('../styles/App.css')
+}
 const FixedDataTable = require('fixed-data-table')
 const React = require('react');
 const {Table, Column, Cell} = FixedDataTable;
@@ -172,5 +174,7 @@ AppComponent.propTypes = {
 
 AppComponent.defaultProps = {
 }
+
+module.exports = AppComponent
 
 export default AppComponent

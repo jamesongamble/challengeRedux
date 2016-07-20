@@ -1,3 +1,27 @@
-h1 {
-  color: blue;
+body {
+  min-width:500px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.index img {
+  margin: 40px auto;
+  border-radius: 4px;
+  background: #fff;
+  display: block;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}
+
+.public_fixedDataTable_main {
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10rem;
 }

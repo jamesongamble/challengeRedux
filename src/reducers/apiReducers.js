@@ -1,7 +1,6 @@
-import _ from 'lodash'
 import { SCHEDULE_ALARM } from '../actions/api'
 
-const initialTravelAuthState = {
+const initialClockState = {
   counter: {
     value: 0
   },
@@ -21,7 +20,7 @@ const initialTravelAuthState = {
   modalData: { showModal: false }
 }
 
-export default function travelAuth(state = initialTravelAuthState, action) {
+export default function scheduleAlarm(state = initialClockState, action) {
   switch (action.type) {
     case SCHEDULE_ALARM: {
       return Object.assign({}, state, { clockData: action.payload, triggerAlarm: action.payload.trigger })

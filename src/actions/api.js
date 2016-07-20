@@ -21,9 +21,9 @@ export function scheduleAlarm (clockData): Action {
     normalizedClockData[key] = normalizedString
   })
 
-  qwest.get(`/api/users/distance`)
+  qwest.get('/api/users/distance')
     .then((xhr, response) => {
-      console.log(response);
+      console.log(response) // eslint-disable-line no-console
       resolve()
     })
   return {

@@ -4,7 +4,7 @@
 
 #### 2. ```npm start``` - starts compilation of assets and server in local test mode for developing
 
-#### 3. browse to http://localhost:8000
+#### 3. browse to http://localhost:3000
 
 ---
 ### Other project scripts
@@ -15,27 +15,12 @@
 
 ---
 # Deploying
-  * ENV variables Example:
-
-    * ```export NODE_ENV=development```
-    * ```export DEBUG=app:*```
-    * ```export HOST=smarttravel-dev.ep.com```
-    * ```export S3_BUCKET=http://smarttravel-dev.ep.com.s3-website-us-west-2.amazonaws.com/``` 
-    * ```export PORT=3000```
-    * ```export IP=10.32.24.6```
-
-
-  * Deploy Steps
 
     * ```npm i```
-    * ```npm run deploy``` OR substitue dev for test/prod env
-    * ```npm run seed```
-    * ```cd dist```
-    * copy the ```client``` folder to s3 bucket 
-    * ```dist``` and the ```node_modules``` folder required for running the server
-      * ```./node_modules``` - node modules lives 1 folder above dist
-      * ```./dist/```
-    * ```node bin/server.js``` - runs the server
+    * ```npm run dist```
+    * ```git add --all```
+    * ```git commit -m "custom message"```
+    * ```git push heroku master``` 
 
 ---
 
@@ -71,8 +56,6 @@ Features
   * react-redux (`^4.4.5`)
   * redux-devtools
   * redux-thunk middleware
-* [react-router](https://github.com/rackt/react-router) (`^2.3.0`)
-* [react-router-redux](https://github.com/rackt/react-router-redux) (`^4.0.0`)
 * [react-bootstrap](http://react-bootstrap.github.io/) (`^0.22.1`) Front End Framework
 * [Express](https://github.com/expressjs/express) (`^4.13.4`)
 * [Qwest](https://github.com/pyrsmk/qwest) (`^4.4.1`)
@@ -84,12 +67,6 @@ Features
   * PhantomJS
   * Code coverage reports/instrumentation with [isparta](https://github.com/deepsweet/isparta-loader)
 * [Flow](http://flowtype.org/) (`^0.22.0`)
-* [Babel](https://github.com/babel/babel) (`^6.7.7`)
-  * [react-transform-hmr](https://github.com/gaearon/react-transform-hmr) hot reloading for React components
-  * [redbox-react](https://github.com/KeywordBrain/redbox-react) visible error reporting for React components
-  * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
-  * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
-  * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
 * [ESLint](http://eslint.org)
   * Uses AirBnb and [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this.
 
