@@ -4,154 +4,77 @@ if (process.env.NODE_ENV !== 'test') {
   require('../styles/App.css')
 }
 const FixedDataTable = require('fixed-data-table')
-const React = require('react');
-const {Table, Column, Cell} = FixedDataTable;
+const React = require('react')
+const {Table, Column, Cell} = FixedDataTable
+const qwest = require('qwest')
+// const TextCell = require('./TextCell')
 
 const TextCell = (props) => {
   if (!props.ads) {
     return (
       <Cell {...props}>
-        {props.state['ads_metrics']['rows'][props.rowIndex][props.col]}
+        { props.state['ads_metrics']['rows'] ? props.state['ads_metrics']['rows'][props.rowIndex][props.col] : null }
       </Cell>
     )
   }
   return (
     <Cell {...props}>
-      {props.state['ads'][props.rowIndex]['name']}
+      { props.state['ads'][props.rowIndex] ? props.state['ads'][props.rowIndex]['name'] : null }
     </Cell>
   )
-};
+}
 
-class AppComponent extends React.Component {
+export class AppComponent extends React.Component {
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
-      ads: [
-        {
-          'id': 1,
-          'remote_id': '123',
-          'name': '123',
-          'status': 'ACTIVE'
-        },
-        {
-          'id': 2,
-          'remote_id': '456',
-          'name': '456',
-          'status': 'ACTIVE'
-        },
-        {
-          'id': 3,
-          'remote_id': '789',
-          'name': '789',
-          'status': 'ACTIVE'
-        },
-        {
-          'id': 4,
-          'remote_id': '901',
-          'name': '901',
-          'status': 'ACTIVE'
-        }
-      ],
-      ads_metrics: {
-        'column_names': [
-          'impressions',
-          'reach',
-          'frequency',
-          'cpm',
-          'spend',
-          'ctr',
-          'cost_per_inline_link_click',
-          'actions:goal',
-          'actions:link_click',
-          'cost_per_action_type:cost_per_goal',
-          'actions:offsite_conversion'
-        ],
-        'rows': [
-          {
-            'remote_id': '456',
-            'impressions': '123',
-            'reach': 123,
-            'frequency': 1.0413449389302,
-            'cpm': 12.30131445905,
-            'spend': 182.49,
-            'ctr': 0.87630603303,
-            'cost_per_inline_link_click': 3.0415,
-            'actions:goal': 3,
-            'actions:link_click': 60,
-            'cost_per_action_type:cost_per_goal': 60.83,
-            'actions:offsite_conversion': 456
-          },
-          {
-            'remote_id': '123',
-            'impressions': '123',
-            'reach': 123,
-            'frequency': 1.0413449389302,
-            'cpm': 12.30131445905,
-            'spend': 182.49,
-            'ctr': 0.87630603303,
-            'cost_per_inline_link_click': 3.0415,
-            'actions:goal': 3,
-            'actions:link_click': 60,
-            'cost_per_action_type:cost_per_goal': 60.83,
-            'actions:offsite_conversion': 123
-          },
-          {
-            'remote_id': '789',
-            'impressions': '123',
-            'reach': 123,
-            'frequency': 1.0413449389302,
-            'cpm': 12.30131445905,
-            'spend': 182.49,
-            'ctr': 0.87630603303,
-            'cost_per_inline_link_click': 3.0415,
-            'actions:goal': 3,
-            'actions:link_click': 60,
-            'cost_per_action_type:cost_per_goal': 60.83,
-            'actions:offsite_conversion': 789
-          },
-          {
-            'remote_id': '901',
-            'impressions': '123',
-            'reach': 123,
-            'frequency': 1.0413449389302,
-            'cpm': 12.30131445905,
-            'spend': 182.49,
-            'ctr': 0.87630603303,
-            'cost_per_inline_link_click': 3.0415,
-            'actions:goal': 3,
-            'actions:link_click': 60,
-            'cost_per_action_type:cost_per_goal': 60.83,
-            'actions:offsite_conversion': 901
-          }
-        ]
+      "ads": {},
+      "ads_metrics": {
+        "rows": []
       }
     }
   }
-
+  componentDidMount = () => {
+    qwest.get(`/ads`)
+      .then((xhr, response) => {
+        this.setState({"ads": response.ads})
+        resolve()
+      })
+    qwest.get(`/ads_metrics`)
+      .then((xhr, response) => {
+        this.setState({"ads_metrics": response["ads_metrics"]})
+        resolve()
+      })
+  }
   render() {
     const state = this.state;
-    const columnNames = this.state['ads_metrics']['column_names']
+    const columnNames = this.state['ads_metrics']['column_names'] || []
     const adsNames = this.state['ads']
+    let firstColumn = null;
+    let rows = this.state.ads_metrics.rows.length 
+    if (columnNames) {
+      firstColumn = 
+        <Column
+          fixed={true}
+          header={<Cell>Ads Name</Cell>}
+          cell={<TextCell ads data={adsNames} col='companyName' state={state}/>}
+          flexGrow={1}
+          width={150}
+        />
+    }
 
     return (
         <Table
           rowHeight={30}
           headerHeight={30}
-          rowsCount={this.state.ads_metrics.rows.length}
+          rowsCount={rows}
           width={1000}
           maxHeight={500}
           className="flexcontainer"
           marginLeft="auto"
           {...this.props}>
 
-          <Column
-            fixed={true}
-            header={<Cell>Ads Name</Cell>}
-            cell={<TextCell ads data={adsNames} col='companyName' state={state}/>}
-            flexGrow={1}
-            width={150}
-            />
+          {firstColumn}
 
           {
             columnNames && columnNames.map((item) => {

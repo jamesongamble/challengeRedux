@@ -88,7 +88,7 @@ Usage
 Before delving into the descriptions of each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
 
 * Doing live development? Use `npm start` to spin up the dev server.
-* Deploying to an environment? `npm run deploy` can help with that.
+* Deploying to an environment? `npm run serve:dist` can help with that.
 
 **NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable via the CLI (e.g. `DEBUG=app:* npm start`) or tweak the npm scripts (`betterScripts` in `package.json`).
 

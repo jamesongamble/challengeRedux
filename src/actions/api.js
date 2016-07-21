@@ -2,7 +2,10 @@ import qwest from 'qwest'
 import _ from 'lodash'
 import resolve from 'resolve'
 
-export const SCHEDULE_ALARM = 'SCHEDULE_ALARM'
+export const ADS = 'ADS'
+export const ADS_METRICS = 'ADS_METRICS'
+
+
 
 // ------------------------------------
 // Actions
@@ -14,24 +17,34 @@ export const SCHEDULE_ALARM = 'SCHEDULE_ALARM'
 // DOUBLE NOTE: there is currently a bug with babel-eslint where a `space-infix-ops` error is
 // incorrectly thrown when using arrow functions, hence the oddity.
 
-export function scheduleAlarm (clockData): Action {
-  const normalizedClockData = {}
-  _.forEach(clockData, (value, key) => {
-    const normalizedString = value.split(' ').join('+')
-    normalizedClockData[key] = normalizedString
-  })
+export function getAds (): Action {
 
-  qwest.get('/api/users/distance')
+  qwest.get(`/ads`)
     .then((xhr, response) => {
-      console.log(response) // eslint-disable-line no-console
+      console.log(response)
+      this.setState({"ads": response})
       resolve()
     })
   return {
-    type: SCHEDULE_ALARM,
-    payload: clockData
+    type: ADS,
+    payload: response
+  }
+
+}
+export function getAdsMetrics (): Action {
+  qwest.get(`/ads_metrics`)
+    .then((xhr, response) => {
+      console.log(response)
+      this.setState({"ads_metrics": response})
+      resolve()
+    })
+  return {
+    type: ADS_METRICS,
+    payload: response
   }
 }
 
 export const actions = {
-  scheduleAlarm
+  getAds,
+  getAdsMetrics
 }
